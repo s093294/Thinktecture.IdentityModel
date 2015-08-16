@@ -51,7 +51,7 @@ namespace Thinktecture.IdentityModel.WebApi
 
         protected virtual bool CheckAccess(HttpRequestMessage request, Claim[] actions, params Claim[] resources)
         {
-            var task = request.CheckAccessAsync(actions, resources);
+            var task = Task.Run(() => request.CheckAccessAsync(actions, resources));
 
             if (task.Wait(5000))
             {
